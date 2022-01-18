@@ -28,7 +28,7 @@ class _ListViewCategoryState extends State<ListViewCategory> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (context) => SubCategory()),
+                      builder: (context) => SubCategory(id: widget.listCategory[index].idCategory!,)),
                 );
               },
               child: Container(

@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
               //tulisan category
               CategoryLabel(),
 
-              //listview product
+              //listview category
               FutureBuilder(
                 future: dataCategory,
                 builder: (context, AsyncSnapshot<CategoryResponse> snapshot) {
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                   } else {
                     return Container(
                       width: double.infinity,
-                      height: 120,
+                      height: 300,
                       child: Center(child: CircularProgressIndicator()),
                     );
                   }

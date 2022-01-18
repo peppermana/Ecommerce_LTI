@@ -1,31 +1,34 @@
 import 'package:e_commerce/api/api.dart';
 import 'package:e_commerce/api/sub_category/sub_category_response.dart';
+import 'package:e_commerce/pages/sub_category/widgets/sub_category_list.dart';
 import 'package:flutter/material.dart';
 
 class SubCategory extends StatefulWidget {
-  const SubCategory({Key? key}) : super(key: key);
+  final String id;
+
+  const SubCategory({Key? key, required this.id}) : super(key: key);
 
   @override
   _SubCategoryState createState() => _SubCategoryState();
 }
 
 class _SubCategoryState extends State<SubCategory> {
-
+  late Future<SubCategoryResponse> listSubCategory;
 
   Future<void> onSwipeRefresh() async {
-    listSubCategory = Api.getSubCategory(String, id);
+    listSubCategory = Api.getSubCategory(widget.id);
   }
-
-  late Future<SubCategoryResponse> listSubCategory;
 
   @override
   void initState() {
-    listSubCategory = Api.getSubCategory(String, id);
+    listSubCategory = Api.getSubCategory(widget.id);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: RefreshIndicator(
@@ -35,74 +38,28 @@ class _SubCategoryState extends State<SubCategory> {
           child: ListView(
             children: [
               Container(
-                width: double.infinity,
-                height: double.infinity,
+                width: width,
+                height: height,
                 child: Column(
                   children: [
                     // subPageTitle(),
 
                     FutureBuilder(
-                        future: listCategory,
+                        future: listSubCategory,
                         builder: (context,
                             AsyncSnapshot<SubCategoryResponse> snapshot) {
                           if (snapshot.hasData) {
-                            return Expanded(
-                              child: Container(
-                                child: GridView.builder(
-                                  itemCount: 3,
-                                  itemBuilder: (context, index) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        //  Navigator.of(context).push(
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) =>
-                                        //             DetailSubCategoryPage()));
-                                      },
-                                      child: Container(
-                                        width: 150,
-                                        height: 150,
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
-                                          child: Stack(
-                                            children: [
-                                              Image.asset(
-                                                "assets/logo.png",
-                                                height: double.infinity,
-                                                width: double.infinity,
-                                                fit: BoxFit.cover,
-                                              ),
-                                              Container(
-                                                color: Color(0x3b0a0a0a)
-                                              ),
-                                              Center(
-                                                child: Text(
-                                                  "sas",
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(color: Colors.white)
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 10,
-                                    mainAxisSpacing: 10,
-                                  ),
-                                ),
-                              ),
-                            );
+                            //1
+                            //mengembalikan wudget subCategoryList ketika data dari Api sudah ada
+                            //dan mengirimkan data snapshot beserta dengan nama categorynya
+                            return SubCategoryList(category: '', subCategoryListData: snapshot.data!.data!,);
                           } else if (snapshot.hasError) {
                             return Container(
                               decoration: BoxDecoration(
                                 color: Colors.white,
                               ),
                               child: Center(
-                                child: Text("Center"),
+                                child: Text("something wrong"),
                               ),
                             );
                           } else {
@@ -120,4 +77,5 @@ class _SubCategoryState extends State<SubCategory> {
       ),
     );
   }
+
 }

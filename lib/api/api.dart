@@ -8,11 +8,11 @@ import 'package:http/http.dart' as http;
 
 import 'carousel/carousel_response.dart';
 
-const baseUrl = "http://192.168.1.7/webservice_ecommerce/index.php/Api/";
+const baseUrl = "http://192.168.1.34/web_permana/webservice_ecommerce/index.php/Api/";
 
 class Api {
   //Carousel
-  static const IMAGE_URL = "http://192.168.1.7/webservice_ecommerce/image/";
+  static const IMAGE_URL = "http://192.168.1.34/web_permana/webservice_ecommerce/image/";
 
   static Future<CarouselResponse> getCarousel() async {
     var url = baseUrl + "Carousel/select_carousel";
@@ -73,9 +73,9 @@ class Api {
     }
   }
 
-  static Future <SubCategoryResponse> getSubCategory(String, id) async{
+  static Future<SubCategoryResponse> getSubCategory(String id) async{
 
-    var url = baseUrl + "Catgeory/select_list_subcategory/$id";
+    var url = baseUrl + "Category/select_list_subcategory/$id";
 
     var response = await http.get(Uri.parse(url));
     if(response.statusCode == 200){

@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                   future: dataProduct,
                   builder: (context, AsyncSnapshot<ProductResponse> snapshot) {
                     if (snapshot.hasData) {
-                      return ListViewProduct(listProduct: snapshot.data!.data!);
+                      return ListViewProduct(listProduct: snapshot.data!.data!,);
                     } else if (snapshot.hasError) {
                       return Container(
                         decoration: BoxDecoration(

@@ -50,9 +50,9 @@ class _SubCategoryState extends State<SubCategory> {
                             AsyncSnapshot<SubCategoryResponse> snapshot) {
                           if (snapshot.hasData) {
                             //1
-                            //mengembalikan wudget subCategoryList ketika data dari Api sudah ada
+                            //mengembalikan widget subCategoryList ketika data dari Api sudah ada
                             //dan mengirimkan data snapshot beserta dengan nama categorynya
-                            return SubCategoryList(category: '', subCategoryListData: snapshot.data!.data!,);
+                            return SubCategoryList(category: "" , subCategoryListData: snapshot.data!.data!,);
                           } else if (snapshot.hasError) {
                             return Container(
                               decoration: BoxDecoration(

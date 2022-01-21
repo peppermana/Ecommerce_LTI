@@ -1,5 +1,6 @@
 import 'package:e_commerce/api/api.dart';
 import 'package:e_commerce/api/product/product_response.dart';
+import 'package:e_commerce/pages/detail_product/detail_product.dart';
 import 'package:flutter/material.dart';
 
 class ListViewProduct extends StatefulWidget {
@@ -33,7 +34,7 @@ class _ListViewProductState extends State<ListViewProduct> {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  // Navigator.of(context).push(MaterialPageRoute (builder: (context) => DetailProducPage()));
+                   Navigator.of(context).push(MaterialPageRoute (builder: (context) => DetailProduct(idProduct: widget.listProduct[index].idProduct!,)));
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
